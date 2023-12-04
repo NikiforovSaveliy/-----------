@@ -3,6 +3,7 @@
 \usepackage{lscape}
 \usepackage{lscape}
 \usepackage[justification=centering]{caption}
+\usepackage{diagbox}
 %Тут можно вставить дополнительные пакеты
 
 \setstretch{1.5}
@@ -113,10 +114,11 @@
                 \hline
                 Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
                 \\ \hline
+                Id & * & \# & Числовой \\ \hline
                 User & * & & Числовой\\ \hline
                 Manager & * & & Числовой\\ \hline
                 Shipping & o & & Числовой \\ \hline
-                Items & * & \# & Числовой  \\ \hline
+                Items & * & * & Числовой  \\ \hline
                 Discount & o & & Денежный \\ \hline  
                 FinalPrice & * & * & Денежный \\ \hline
             \end{tabular}
@@ -136,7 +138,8 @@
                 Manager & * & & Числовой\\ \hline
                 RealizationDate & o & & Дата и время \\ \hline
                 Name & * & \# & Символьный  \\ \hline
-                BaseCostByUnit & * & & Денежный \\ \hline  
+                BaseCostByUnit & * & & Денежный \\ \hline
+                Amount & * & & Денежный \\ \hline 
             \end{tabular}
             \caption{Описание сущности <<Товар на складе>>.}
         \end{table}
@@ -159,7 +162,60 @@
         \end{table}
 
         Атрибут <<Id>> является искуственным первичным ключем, для однозначного опредления доставки в системе.
+    
+    \subsection*{Сущность <<Поставка>>}
+
+        \begin{table}[H]
+            \begin{tabular}{|p{0.25\linewidth}|p{0.3\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
+                \hline
+                Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
+                \\ \hline
+                Id & * & \# & \\ \hline
+                DocumentNumber & * & (\#) & Символьный\\ \hline
+                Date & * & & Дата и время \\ \hline
+                Provider & * & & Символьный \\ \hline
+                ContactNumber & * & & Символьный \\ \hline
+            \end{tabular}
+            \caption{Описание сущности <<Поставка>>.}
+        \end{table}
+    
+    \section{Определение бизнесс правил}
+
+    Для данной системы характерны следующие бизнес-правила:
+    \begin{itemize}
+        \item Покупатель может забрать заказ как лично, так и заказать доставку
+        \item Сведения о покупках хранятся в базе данных ввиде заказов
+        \item Покупатели приобретают товары, располагающиеся на складе
+        \item Покупатель может получить скидку, если зарегестрирован в системе с заполнением ФИО
+        \item Доставка осщуествляется подрядной организацией
+        \item Товары, по истечению срока реализации требуется списать
+    \end{itemize}
+    
+    \begin{landscape}
         
     
- 
+    \section{Матрица связей}
+
+    \begin{table}[H]
+        \begin{tabular}{|p{0.13\linewidth}|p{0.13\linewidth}|p{0.13\linewidth}|p{0.13\linewidth}|p{0.13\linewidth}|p{0.13\linewidth}|p{0.13\linewidth}|}
+            \hline
+            \diagbox[width=7.55em]& User & Sell & Item & Delivery & ItemOnStock & Suply
+            \\ \hline
+            
+            User & \diagbox[width=7.55em] & & & & & \\ \hline 
+
+            Sell & Triggered by  & \diagbox[width=7.55em] & & & & \\ \hline
+
+            Item & & & \diagbox[width=7.55em] & & & \\ \hline
+            
+            Delivery & & & & \diagbox[width=7.55em] & & \\ \hline
+
+            ItemOnStock & & & & & \diagbox[width=7.55em] & \\ \hline
+
+            Suply & & & & & & \diagbox[width=7em] \\ \hline
+
+        \end{tabular}
+    \end{table}
+    \end{landscape}
+
 \end{document} 
