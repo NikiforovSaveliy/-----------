@@ -5,13 +5,14 @@
 \usepackage[justification=centering]{caption}
 \usepackage{diagbox}
 \usepackage{graphics}
+\usepackage{alltt}
 %Тут можно вставить дополнительные пакеты
 
 \setstretch{1.5}
 
 \begin{document}
 \pagestyle{empty} %  выключаем нумерацию
-\includepdf[pages=-,pagecommand={}]{titulCourse.pdf}
+\includepdf[pages=-,pagecommand={}]{titleCourse.pdf}
 
 \pagestyle{plain} % включаем нумерацию
 
@@ -92,25 +93,49 @@
     \subsection*{Сущность <<Пользователь системы>>}
 
             \begin{table}[H]
-                \begin{tabular}{|p{0.2\linewidth}|p{0.3\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
+                \begin{tabular}{|p{0.225\linewidth}|p{0.3\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
                     \hline
                     Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
                     \\ \hline
-                    Id & * & \# & Числовой \\ \hline
-                    FirstName & o & & Символьный\\ \hline
-                    SecondName & o & & Символьный\\ \hline
-                    LastName & o & & Символьный \\ \hline
-                    Email & * & (\#) & Символьный  \\ \hline
-                    PhoneNumber & о & & Символьный\\ \hline
-                    Type & * & & Числовой \\ \hline
+                    idUser & * & \# & Числовой \\ \hline
+                    first\_name & o & & Символьный\\ \hline
+                    second\_name & o & & Символьный\\ \hline
+                    last\_name & o & & Символьный \\ \hline
+                    email & * & (\#) & Символьный  \\ \hline
+                    phone\_number & о & & Символьный\\ \hline
+                    membership\_title & * & & Числовой \\ \hline
                 \end{tabular}
 
                 \caption{Описание сущности <<Пользователь>>.}
             \end{table}
         
         Сущность пользователь предоставляет всех пользователей системы,%
-         которые могут взаимодействовать с системой. Атрибут <<Type>> %
+         которые могут взаимодействовать с системой. Атрибут <<membership\_title>> %
           определяется принадлежность пользователя к системе акций.
+    
+        \subsection*{Сущность <<Работник>>}
+
+        \begin{table}[H]
+            \begin{tabular}{|p{0.225\linewidth}|p{0.3\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
+                \hline
+                Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
+                \\ \hline
+                idEmployee & * & \# & Числовой \\ \hline
+                first\_name & * & & Символьный\\ \hline
+                second\_name & * & & Символьный\\ \hline
+                last\_name & * & & Символьный \\ \hline
+                email & * & (\#) & Символьный  \\ \hline
+                phone\_number & * & & Символьный\\ \hline
+                role\_title & * & & Числовой \\ \hline
+                INN & * & (\#) & Символьный \\ \hline
+                SNILS & * & (\#) & Символьный \\ \hline 
+            \end{tabular}
+
+            \caption{Описание сущности <<Работник>>.}
+        \end{table}
+        
+        Для однозначной идентификации работника был введен исскуственный первичный ключ <<idEmployee>>.
+
 
     \subsection*{Сущность <<Продажа>>}
 
@@ -119,55 +144,17 @@
                 \hline
                 Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
                 \\ \hline
-                Id & * & \# & Числовой \\ \hline
-                User & о & & Числовой\\ \hline
-                Manager & * & & Числовой\\ \hline
-                Shipping & o & & Числовой \\ \hline
-                Discount & o & & Денежный \\ \hline  
-                FinalPrice & * & & Денежный \\ \hline
-                Status & * & & Строковый \\ \hline
+                idSell & * & \# & Числовой \\ \hline
+                emoployee\_id & * & & Числовой\\ \hline
+                user\_id & * & & Числовой\\ \hline
+                final\_price & 8 & & Денежный \\ \hline
+                sell\_date & * & & Дата и время \\ \hline  
+                delivery & o & & Числовой \\ \hline
             \end{tabular}
             \caption{Описание сущности <<Продажа>>.}
         \end{table}
 
-        Сущность <<Продажа>> отображает процесс покупки какого-либо товара. Атрибут <<Status>> предполагает записи справочной таблицы о возможных состояниях заказа.
-    
-        \subsection*{Сущность <<Продажа>>}
-
-        \begin{table}[H]
-            \begin{tabular}{|p{0.2\linewidth}|p{0.3\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
-                \hline
-                Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
-                \\ \hline
-                Id & * & \# & Числовой \\ \hline
-                User & о & & Числовой\\ \hline
-                Manager & * & & Числовой\\ \hline
-                Shipping & o & & Числовой \\ \hline
-                Discount & o & & Денежный \\ \hline  
-                FinalPrice & * & & Денежный \\ \hline
-                Status & * & & Строковый \\ \hline
-            \end{tabular}
-            \caption{Описание сущности <<Продажа>>.}
-        \end{table}
-
-        Сущность <<Продажа>> отображает процесс покупки какого-либо товара. Атрибут <<Status>> предполагает записи справочной таблицы о возможных состояниях заказа.
-    
-    \subsection*{Сущность <<Позиция продажи>>}
-
-        \begin{table}[H]
-            \begin{tabular}{|p{0.2\linewidth}|p{0.3\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
-                \hline
-                Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
-                \\ \hline
-                Sell & * & \# & Числовой\\ \hline
-                Item & * & \# & Числовой \\ \hline
-                Amount & * & & Числовой \\ \hline
-            \end{tabular}
-            \caption{Описание сущности <<Позиция продажи>>.}
-        \end{table}
-
-        Сущность <<Позиция продажи>> является сущностью пересечения.
-
+        Сущность <<Продажа>> отображает процесс покупки какого-либо товара. Так как доставка заказов выполняется сторонними подрядчиками, то данное поле может принимать <<Null>>.
 
     \subsection*{Сущность <<Товар на складе>>}
 
@@ -176,50 +163,72 @@
                 \hline
                 Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
                 \\ \hline
-                Id & * & \# & Числовой \\ \hline
-                Shipment & * & & Числовой\\ \hline
-                RealizationDate & o & & Дата и время \\ \hline
-                Name & * &  & Символьный  \\ \hline
-                BaseCostByUnit & * & & Денежный \\ \hline
-                Amount & * & & Денежный \\ \hline 
+                idItemInStock & * & \# & Числовой \\ \hline
+                label & * & & Символьный\\ \hline
+                realization\_date & * & & Дата и время \\ \hline
+                base\_cost & * &  & Символьный  \\ \hline
+                balance & * & & Денежный \\ \hline
+                shipment\_id & * & & Числовой \\ \hline 
             \end{tabular}
             \caption{Описание сущности <<Товар на складе>>.}
         \end{table}
 
-        Атрибут поставка предоставляет определенную поставку, которая прибыла в магазин по документам.
+        Атрибут <<shipment\_id>> предоставляет определенную поставку, которая прибыла в магазин по документам.%
+        <<balance>> отображает остаток товара, которых хранится в магазине. Атрибут <<base\_cost>> отображает базовую стоимость товара за единицу. 
     
-    \subsection*{Сущность <<Доставка>>}
+        \subsection*{Сущность <<Позиция продажи>>}
+
+        \begin{table}[H]
+            \begin{tabular}{|p{0.225\linewidth}|p{0.3\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
+                \hline
+                Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
+                \\ \hline
+                sell\_id & * & \# & Числовой\\ \hline
+                item\_in\_stock\_id & * & \# & Числовой \\ \hline
+                amount & * & & Денежный \\ \hline
+                price & * & & Денежный \\ \hline
+            \end{tabular}
+            \caption{Описание сущности <<Позиция продажи>>.}
+        \end{table}
+
+        Сущность <<Позиция продажи>> является сущностью пересечения между сущностями <<Товары на складе>> и <<Продажа>>.
+
+
+    \subsection*{Сущность <<Поставка>>}
 
         \begin{table}[H]
             \begin{tabular}{|p{0.2\linewidth}|p{0.3\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
                 \hline
                 Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
                 \\ \hline
-                Id & * & \# & \\ \hline
-                Adress & * & & Символьный\\ \hline
-                DeliveryTime & o & & Дата и время \\ \hline
-                Contractor & * & & Целочисленный \\ \hline
+                idShipment & * & \# & Целочисленный \\ \hline
+                employee\_id & * & & Целочисленный\\ \hline
+                contractor\_id & * & & Целочисленный \\ \hline
+                document & * & & Целочисленный \\ \hline
+                delivery\_date & * & & Дата \\ \hline
             \end{tabular}
             \caption{Описание сущности <<Доставка>>.}
         \end{table}
 
-        Атрибут <<Id>> является искуственным первичным ключем, для однозначного опредления доставки в системе.
+        Атрибут <<id>> является искуственным первичным ключем, для однозначного опредления поставки в системе.%
+
     
-    \subsection*{Сущность <<Поставка>>}
+    \subsection*{Сущность <<Доставка>>}
 
         \begin{table}[H]
             \begin{tabular}{|p{0.25\linewidth}|p{0.3\linewidth}|p{0.2\linewidth}|p{0.2\linewidth}|}
                 \hline
                 Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
                 \\ \hline
-                Id & * & \# & \\ \hline
-                DocumentNumber & * & (\#) & Символьный\\ \hline
-                Date & * & & Дата и время \\ \hline
-                Provider & * & & Символьный \\ \hline
-                Contactor & * & & Числовой \\ \hline
+                idDelivery & * & \# & Целочисленный \\ \hline
+                delivery\_cost & * & & Денежный\\ \hline
+                address & * & & Символьный \\ \hline
+                contractor\_id & * & & Целочисленный \\ \hline
             \end{tabular}
             \caption{Описание сущности <<Поставка>>.}
         \end{table}
+
+        Для совершении доставки испльзуются услуги подрядчиков, уникальный идентификатор которого отображен в поле <<contractor\_id>>.
 
     \subsection*{Сущность <<Подрядчики>>}
 
@@ -228,10 +237,12 @@
                 \hline
                 Наименование атрибута & Обязательный/не обязательный (*/o) & уникальный идентификатор (\#) & Тип для логической модели
                 \\ \hline
-                INN & * & \# & \\ \hline
-                ContactNumber & * &  & Символьный\\ \hline
-                CompanyName & * & (\#) & Дата и время \\ \hline
-                Description & о & & Символьный \\ \hline
+                idContractor & * & \# & Целочисленный \\ \hline
+                INN & * & (\#) & Символьный \\ \hline
+                contact\_number & * &  & Символьный\\ \hline
+                contact\_mail & * & & Символьный \\ \hline
+                compaby\_name & * & (\#) & Дата и время \\ \hline
+                description & о & & Символьный \\ \hline
             \end{tabular}
             \caption{Описание сущности <<Подрядчик>>.}
         \end{table}
@@ -240,13 +251,14 @@
 
     Для данной системы характерны следующие бизнес-правила:
     \begin{itemize}
-        \item Покупатель может забрать заказ как лично, так и заказать доставку
-        \item Сведения о покупках хранятся в базе данных ввиде заказов
-        \item Покупатели приобретают товары, располагающиеся на складе
-        \item Покупатель может получить скидку, если зарегестрирован в системе с заполнением ФИО
-        \item Доставка осуществляется подрядной организацией
-        \item Товары, по истечению срока реализации требуется списать
-        \item Поставки продуктов реализует стороний подрядчик
+        \item Покупатель может забрать заказ как лично, так и заказать доставку.
+        \item Сведения о покупках хранятся в базе данных ввиде заказов.
+        \item Покупатели приобретают товары, располагающиеся на складе.
+        \item Покупатель может получить скидку, если зарегестрирован в системе лояльности.
+        \item Доставка осуществляется подрядной организацией.
+        \item Товары, по истечению срока реализации требуется списать.
+        \item Поставки продуктов реализует стороний подрядчик.
+        \item Заказы можно забрать из физической точки.
     \end{itemize}
     
     \begin{landscape}
@@ -254,28 +266,134 @@
     
     \section{Матрица связей}
     
-    
-
-    \begin{table}[H]
-        \begin{tabular}{|p{0.13\linewidth}|p{0.13\linewidth}|p{0.13\linewidth}|p{0.13\linewidth}|p{0.13\linewidth}|p{0.13\linewidth}|p{0.13\linewidth}|}
-            \hline
-            \diagbox[width=7.55em]& User & Sell & Item & Delivery & ItemOnStock & Suply
-            \\ \hline
-            
-            User & \diagbox[width=7.55em] & & & & & \\ \hline 
-
-            Sell & Triggered by  & \diagbox[width=7.55em] & & & & \\ \hline
-
-            Item & & & \diagbox[width=7.55em] & & & \\ \hline
-            
-            Delivery & & & & \diagbox[width=7.55em] & & \\ \hline
-
-            ItemOnStock & & & & & \diagbox[width=7.55em] & \\ \hline
-
-            Suply & & & & & & \diagbox[width=7em] \\ \hline
-
-        \end{tabular}
-    \end{table}
+    \begin{figure}[H]%current location
+        \centering
+        \scalebox{0.5}{\includegraphics{talbe_of_relations.png}}
+        \caption{Таблица связей сущностей.}
+        \label{pic1} 
+       \end{figure}
     \end{landscape}
+
+\chapter{Логическое проектирование.}
+    В процессе выполнения логического проектирования и построения ERD диаграммы были разрешены связи многие-ко-многим при помощи %
+    сущностей пересечения. В частности связь многие-ко-многим в отношении Продажи и предметов в магазине. Была проведена нормализация данных, в частности для% 
+    таблицы документов, котрые были вынесены в отдельные сущности для ускорения работы базы данных, так как электронные копии документов храняться в <<BLOB>>.
+
+    От денормализации отношений было принято отказаться, в связи возможного дополнениня расширения ролей и бизнесс-правил относительно системы лояльности. 
+    Итоговая ERR-диаграмма изображена на рисунке ниже \ref{ERR}.
+
+    
+    
+    \begin{figure}[H]%current location
+        \centering
+        \scalebox{0.30}{\includegraphics{db_schema.png}}
+        \caption{ERR-диаграмма.}
+        \label{ERR} 
+       \end{figure}
+
+
+\chapter{Преобразование логической модели в физическую}
+
+\section{Создание физической базы данных}
+
+    Для создания базы данных была применена технология контейнеризации, для запуска базы данных внутри контейнера.%
+    Листинг контейнера приведен ниже \ref{docker}.
+
+    \begin{figure}[H]
+        \begin{verbatim}
+            version: '3.1'
+            services:
+            db:
+                image: mysql
+                restart: always
+                ports:
+                - "3306:3306"
+                environment:
+                MYSQL_ROOT_PASSWORD: maindb
+                MYSQL_DATABASE: maindb
+                MYSQL_USER: maindb
+                MYSQL_PASSWORD: maindb
+                volumes:
+                - ./dbdata:/var/lib/mysq
+        \end{verbatim}
+        \caption{Листинг YML-файла <<docker-compose.yml>>}
+        \label{docker}
+    \end{figure}
+
+    После старта рабты контейнера к нему возможно подлючиться средствами <<MySqlWorkbench>> или аналогичным ПО. %
+    В нашем случае было принято решение использовать <<Datagrip>>. Процесс создания базы данных изображен на рисунке ниже \ref{create_db}.
+
+    \begin{figure}[H]%current location
+        \centering
+        \scalebox{0.30}{\includegraphics{create_db.png}}
+        \caption{ERR-диаграмма.}
+        \label{create_db} 
+    \end{figure}
+
+
+    
+\section{Создание SQL запросов}
+    В данном разделе приведены SQL запросы для получения информации из базы данных
+
+    
+        1. Получение всех заказов на доставку, которые были подтверждены определенным сотрудником.
+            \begin{center}
+                \begin{verbatim}
+                SELECT * FROM Delivery
+                INNER JOIN Employee
+                ON Delivery.employee_id = Employee.idEmployee
+                WHERE Employee.first_name = [ИМЯ_СОТРУДНИКА]
+                AND
+                Employee.last_name = [ФАМИЛИЯ_СОТРУДНИКА];
+                \end{verbatim}
+            \end{center}
+        2. Получение товаров на складе у которых истекла дата реализации.
+            \begin{center}
+                \begin{verbatim}
+                    SELECT * FROM ItemsInStock
+                    WHERE realization_date < CURRENT_DATE;
+
+                \end{verbatim}
+            \end{center}
+        
+        3. Получение заявок на доставку которая была принята определенным подрядчиком.
+            
+                \begin{verbatim}
+                    SELECT * FROM Delivery
+                    INNER JOIN Contractor
+                    ON Delivery.contractor_id=Contractor.idContractor
+                    WHERE Contractor.INN = [ИНН_подрядчика];
+                \end{verbatim}
+            
+        
+        4. Удаление позиций на складке, чей срок реализации истек.
+            \begin{center}
+                \begin{verbatim}
+                    DELETE FROM ItemsInStock
+                    WHERE realization_date < CURRENT_DATE;
+                \end{verbatim}
+            \end{center}
+        
+        
+        5. Создание заказа с выбранными пользователем позициями.
+
+        \begin{verbatim}
+
+        DECLARE @amount DECIMAL(10, 2) = 0;
+
+        INSERT INTO Sell (final_price) 
+        VALUES 
+            (@amount);
+
+        SELECT 
+            @amount := SUM(price * amount) 
+        FROM 
+            Sell_has_ItemsInStock 
+        WHERE 
+            sell_id = [ID_ЗАКАЗА];
+
+        \end{verbatim}
+
+
 
 \end{document} 
