@@ -7,7 +7,7 @@
 \voffset 0pt
 
 \RequirePackage[
-  a4paper, includehead, includefoot, mag=1000,
+  a4paper, includehead, includefoot,
   headsep=0mm, headheight=0mm,
   left=25mm, right=15mm, top=20mm, bottom=20mm
 ]{geometry}
@@ -70,7 +70,7 @@
 
 \fancypagestyle{plain}{ 
     \fancyhf{}
-    \rfoot{\thepage}}
+    \cfoot{\thepage}}
     
 % \makeatletter 
 % \renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi \thispagestyle{fancyplain}%
@@ -151,7 +151,7 @@
 
 \makeatletter
   \renewcommand{\@biblabel}[1]{#1.} % Заменяем библиографию с квадратных скобок на точку:
-\makeatother
+\makeatother 
 
 \renewcommand{\rmdefault}{cmr} % Шрифт с засечками
 
